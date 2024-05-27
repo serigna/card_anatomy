@@ -21,18 +21,15 @@ class CardCreation:
         processed_digits_sum = self.luhn_algorithm(
             list(map(int, card_num))
         )
-        last_digit = 10 - processed_digits_sum % 10 if processed_digits_sum != 0 else 0
+        last_digit = (10 - processed_digits_sum) % 10
         card_num = card_num + str(last_digit)
         return card_num
 
     @staticmethod
     def luhn_algorithm(digits: list) -> int:
         total_sum = 0
-        num_digits = len(digits)
-        parity = num_digits % 2
-
         for i, digit in enumerate(digits):
-            if i % 2 == parity:
+            if i % 2 == 0:
                 digit *= 2
                 if digit > 9:
                     digit -= 9
