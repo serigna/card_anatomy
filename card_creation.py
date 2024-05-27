@@ -6,7 +6,7 @@ class CardCreation:
     card_issuer_id = "400000"
 
     def __init__(self):
-        self.card_number = self._generate_last_card_number()
+        self.card_number = self._generate_card_number()
         self.card_pin = str(random.randint(1000, 9999))
 
     def print_card_details(self) -> None:
@@ -16,7 +16,7 @@ class CardCreation:
     def _generate_base_card_number(self) -> str:
         return self.card_issuer_id + str(random.randint(100000000, 999999999))
 
-    def _generate_last_card_number(self) -> str:
+    def _generate_card_number(self) -> str:
         card_num = self._generate_base_card_number()
         processed_digits_sum = self.luhn_algorithm(
             list(map(int, card_num))
