@@ -21,7 +21,7 @@ class CardCreation:
         processed_digits_sum = self.luhn_algorithm(
             list(map(int, card_num))
         )
-        last_digit = (10 - processed_digits_sum) % 10
+        last_digit = 10 - processed_digits_sum
         card_num = card_num + str(last_digit)
         return card_num
 
@@ -34,4 +34,4 @@ class CardCreation:
                 if digit > 9:
                     digit -= 9
             total_sum += digit
-        return total_sum
+        return total_sum % 10
