@@ -1,4 +1,6 @@
 import random
+import sqlite3
+from sqlite3 import Cursor, Connection
 
 
 class CardCreation:
@@ -35,3 +37,14 @@ class CardCreation:
                     digit -= 9
             total_sum += digit
         return total_sum % 10
+
+    def insert_data_to_db(
+            self, conn: Connection, db_cur_instance: Cursor
+    ) -> None:
+        try:
+            db_cur_instance.execute(f"""INSERT INTO card(id, number, pin)
+            VALUES (1, "{self.card_number}", "{self.card_pin}");""")
+            conn.commit()
+        except sqlite3.Error as e:
+            print(e)
+            raise
